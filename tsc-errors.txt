@@ -1,0 +1,6 @@
+﻿components/MapInner.tsx(26,17): error TS2322: Type '{ children: (Element | Element[])[]; center: number[]; zoom: number; style: { height: number; width: string; }; zoomControl: boolean; }' is not assignable to type 'IntrinsicAttributes & MapContainerProps & RefAttributes<LeafletMap>'.
+  Property 'center' does not exist on type 'IntrinsicAttributes & MapContainerProps & RefAttributes<LeafletMap>'.
+components/MapInner.tsx(33,21): error TS2322: Type '{ url: string; attribution: string; }' is not assignable to type 'IntrinsicAttributes & TileLayerProps & RefAttributes<LeafletTileLayer>'.
+  Property 'attribution' does not exist on type 'IntrinsicAttributes & TileLayerProps & RefAttributes<LeafletTileLayer>'.
+components/MapInner.tsx(42,29): error TS2322: Type '{ children: Element; key: string; center: number[]; radius: number; fillColor: string; color: string; weight: number; opacity: number; fillOpacity: number; }' is not assignable to type 'IntrinsicAttributes & CircleMarkerProps & RefAttributes<LeafletCircleMarker<any>>'.
+  Property 'radius' does not exist on type 'IntrinsicAttributes & CircleMarkerProps & RefAttributes<LeafletCircleMarker<any>>'.
