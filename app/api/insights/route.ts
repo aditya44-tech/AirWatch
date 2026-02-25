@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getMockCity, MOCK_INSIGHTS } from '@/lib/mock-data';
+import { getMockCity, getMockInsights } from '@/lib/mock-data';
 import { getGeminiResponse, buildInsightsPrompt } from '@/lib/gemini';
 
 export async function GET(req: NextRequest) {
@@ -18,6 +18,7 @@ export async function GET(req: NextRequest) {
 
         return NextResponse.json({ city, insights, source: 'ai' });
     } catch {
-        return NextResponse.json({ city, insights: MOCK_INSIGHTS, source: 'mock' });
+        const cityData = getMockCity(city);
+        return NextResponse.json({ city, insights: getMockInsights(cityData), source: 'mock' });
     }
 }

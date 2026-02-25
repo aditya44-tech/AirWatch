@@ -106,21 +106,75 @@ export function getAqiCategory(aqi: number): {
     return { label: 'Hazardous', color: '#7f1d1d', bg: 'bg-red-900', textClass: 'text-red-300' };
 }
 
-export const MOCK_INSIGHTS = [
-    '🚗 Heavy traffic congestion on major arterials is the primary contributor to elevated PM2.5 levels during peak hours.',
-    '🌡️ High temperature and low humidity are trapping pollutants near the surface, worsening AQI.',
-    '🏭 Industrial emissions from the eastern corridor spiked overnight, raising NO₂ by 18%.',
-    '🌧️ Light rainfall forecasted in 12 hours is expected to wash out particulates and improve AQI significantly.',
-    '🌬️ Wind direction shifted westward — pollutants from neighboring regions are being carried into the city.',
-];
+export function getMockInsights(cityData: CityData): string[] {
+    const insights: string[] = [];
 
-export const MOCK_ADVISORY = {
-    riskLevel: 'High',
-    recommendations: [
-        '😷 Wear an N95 mask when stepping outdoors — PM2.5 is at 3.2x the safe limit.',
-        '🏃 Avoid outdoor exercise; reschedule morning runs to after 10 PM when AQI typically drops.',
-        '🪟 Keep windows closed and run air purifiers with HEPA filters indoors.',
-        '👶 Children, elderly, and those with respiratory conditions should remain indoors.',
-        '🕐 If outdoor activity is unavoidable, limit exposure to under 30 minutes between 2 PM – 4 PM.',
-    ],
-};
+    // Insight 1: General based on city and AQI
+    if (cityData.aqi > 200) {
+        insights.push(`🚨 ${cityData.city} is currently experiencing severe air pollution, primarily driven by seasonal and geographical factors trapping emissions.`);
+    } else if (cityData.aqi > 100) {
+        insights.push(`⚠️ Moderate-to-poor air quality in ${cityData.city} due to accumulated local emissions.`);
+    } else {
+        insights.push(`✅ Air quality in ${cityData.city} is currently within acceptable limits.`);
+    }
+
+    // Insight 2: PM2.5 / Traffic
+    if (cityData.pm25 > 50) {
+        insights.push(`🚗 Heavy vehicular traffic and construction dust are keeping PM2.5 levels elevated at ${cityData.pm25} μg/m³.`);
+    } else {
+        insights.push(`🚗 PM2.5 levels are stable, indicating normal traffic flow without major congestion impacts.`);
+    }
+
+    // Insight 3: NO2 / Industry
+    if (cityData.no2 > 40) {
+        insights.push(`🏭 Significant NO₂ concentrations detected (${cityData.no2} μg/m³), indicating localized industrial emissions are a major contributing factor.`);
+    } else {
+        insights.push(`🏭 Industrial pollutant indicators like NO₂ are currently well within normal ranges.`);
+    }
+
+    // Insight 4: Weather
+    if (cityData.lat > 25) { // Northern cities (e.g. Delhi, Jaipur, Lucknow)
+        insights.push(`🌡️ Low temperatures and low wind speeds in northern India are preventing dispersion of particulate matter.`);
+    } else if (cityData.lat < 15) { // Southern cities (e.g. Bangalore, Chennai)
+        insights.push(`🌧️ Stronger coastal or southern breezes are aiding in the dispersion of localized pollutants.`);
+    } else {
+        insights.push(`🌬️ Stagnant wind conditions are currently maintaining elevated pollutant concentrations near the surface in central regions.`);
+    }
+
+    // Insight 5: Predictive trend
+    insights.push(`📈 Based on historical patterns for ${cityData.city}, we anticipate a slight improvement in AQI over the next 12 hours as weather patterns shift.`);
+
+    return insights;
+}
+
+export function getMockAdvisory(cityData: CityData): { riskLevel: string, recommendations: string[] } {
+    let riskLevel = 'Low';
+
+    if (cityData.aqi > 300) riskLevel = 'Hazardous';
+    else if (cityData.aqi > 200) riskLevel = 'High';
+    else if (cityData.aqi > 100) riskLevel = 'Medium';
+
+    const recommendations = [];
+
+    if (riskLevel === 'Hazardous' || riskLevel === 'High') {
+        recommendations.push(`😷 Wear an N95 mask when stepping outdoors in ${cityData.city}.`);
+        recommendations.push(`🏃 Strictly avoid outdoor exercise; limit physical exertion.`);
+        recommendations.push(`🪟 Keep windows closed and run HEPA air purifiers indoors.`);
+        recommendations.push(`👶 Children, the elderly, and asthmatics must remain indoors immediately.`);
+        recommendations.push(`🕐 Avoid leaving the house entirely unless absolutely necessary.`);
+    } else if (riskLevel === 'Medium') {
+        recommendations.push(`😷 Sensitive individuals should consider wearing a mask outdoors.`);
+        recommendations.push(`🏃 Reduce prolonged or heavy exertion outdoors.`);
+        recommendations.push(`🪟 Keep windows closed during peak traffic hours.`);
+        recommendations.push(`👶 Children and elderly should limit outdoor activities.`);
+        recommendations.push(`🕐 Best time for outdoor activity in ${cityData.city} is early morning or late evening.`);
+    } else {
+        recommendations.push(`✅ Air quality is good; it's a great day for outdoor activities.`);
+        recommendations.push(`🏃 Ideal conditions for exercising outdoors.`);
+        recommendations.push(`🪟 Open your windows to let fresh air circulate indoors.`);
+        recommendations.push(`👶 Perfectly safe for children and the elderly to be outside.`);
+        recommendations.push(`😷 No mask or special precautions are required today in ${cityData.city}.`);
+    }
+
+    return { riskLevel, recommendations };
+}
