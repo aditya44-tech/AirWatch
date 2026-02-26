@@ -28,10 +28,12 @@ export default function MapInner({ cities }: { cities: CityMarker[] }) {
     zoomControl={false}
 >
             
-                <TileLayer
-                    url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-                    attribution='&copy; <a href="https://www.openstreetmap.org">OSM</a> &copy; <a href="https://carto.com">CARTO</a>'
-                />
+               <TileLayer
+    {...({
+        url: "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+        attribution: '&copy; <a href="https://www.openstreetmap.org">OSM</a> &copy; <a href="https://carto.com">CARTO</a>'
+    } as any)}
+/>
                 {cities.map(marker => {
                     const cat = getAqiCategory(marker.aqi);
                     const radius = 8 + marker.aqi * 0.08;
