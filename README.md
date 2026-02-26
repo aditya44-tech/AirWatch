@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🌫️ AirWatch — Real-Time Air Quality Dashboard for India
+AirWatch is a real-time air quality monitoring and analytics platform built for Indian cities. It provides live AQI data, pollution history, 24-hour predictions, city comparisons, and AI-generated health advisories — all in one clean, dark-mode interface.
+✨ Features
 
-## Getting Started
+🗺️ Interactive Pollution Map — Visual AQI markers across major Indian cities
+📊 48-Hour History Charts — Track how air quality has changed over time
+🔮 24-Hour AQI Predictions — Rush hour and weather-aware forecasting
+🏙️ City Comparison Tool — Compare pollutant levels across multiple cities side by side
+🤖 AI-Powered Insights — Gemini AI analyzes uploaded CSV data and generates actionable insights
+💊 Health Advisories — Personalized recommendations based on current AQI levels
+📁 CSV Upload & Analysis — Upload your own pollution dataset for instant AI analysis
 
-First, run the development server:
+🛠️ Tech Stack
 
-```bash
+Frontend: Next.js 15, React, Tailwind CSS
+Maps: React Leaflet
+AI: Google Gemini API
+Charts: Recharts
+Deployment: Vercel
+
+🚀 Getting Started
+bashgit clone https://github.com/aditya44-tech/AirWatch
+cd AirWatch
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view it locally.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🔑 Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Create a `.env.local` file in the root:
+```
+GEMINI_API_KEY=your_gemini_api_key_here
+The app works without the API key using rich mock data as fallback.
+🌐 Live Demo
+View Live on [Vercel](https://air-watch-44-hyqur8zmw-aditya44-techs-projects.vercel.app/dashboard)
