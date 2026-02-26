@@ -22,11 +22,11 @@ export default function MapInner({ cities }: { cities: CityMarker[] }) {
                     Circle size and color indicate AQI level
                 </p>
             </div>
-            <MapContainer
-                center={[22, 80] as [number, number]}
-                zoom={5}
-                style={{ height: 360, width: '100%' }}
-                zoomControl={false}
+           <MapContainer
+    {...({ center: [22, 80], zoom: 5 } as any)}
+    style={{ height: 360, width: '100%' }}
+    zoomControl={false}
+>
             >
                 <TileLayer
                     url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
