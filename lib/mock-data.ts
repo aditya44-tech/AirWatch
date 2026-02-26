@@ -1,5 +1,5 @@
 // Rich mock data used as fallback when API keys are not configured
-
+import { getMockInsights } from '@/lib/mock-data';
 export interface CityData {
     city: string;
     lat: number;
