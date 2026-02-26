@@ -23,7 +23,7 @@ export default function MapInner({ cities }: { cities: CityMarker[] }) {
                 </p>
             </div>
             <MapContainer
-                center={[22, 80]}
+                center={[22, 80] as [number, number]}
                 zoom={5}
                 style={{ height: 360, width: '100%' }}
                 zoomControl={false}
