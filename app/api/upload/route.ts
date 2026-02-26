@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
             line.split(',').reduce((obj, val, i) => ({ ...obj, [headers[i]]: val.trim() }), {} as Record<string, string>)
         );
 
-        let insights: string[] = MOCK_INSIGHTS;
+       let insights: string[] = getMockInsights(CITIES[0]);
         if (process.env.GEMINI_API_KEY) {
             try {
                 const { getGeminiResponse } = await import('@/lib/gemini');
