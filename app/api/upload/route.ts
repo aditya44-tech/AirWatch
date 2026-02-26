@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { MOCK_INSIGHTS } from '@/lib/mock-data';
+import { getMockInsights } from '@/lib/mock-data';
 
 export async function POST(req: NextRequest) {
     try {
