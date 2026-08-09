@@ -33,5 +33,4 @@ Create a `.env.local` file in the root:
 ```
 GEMINI_API_KEY=your_gemini_api_key_here
 The app works without the API key using rich mock data as fallback.
-🌐 Live Demo
-View Live on [Vercel](https://air-watch-44-hyqur8zmw-aditya44-techs-projects.vercel.app/dashboard)
+
