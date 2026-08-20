@@ -3,64 +3,80 @@
 import { Sparkles, TrendingUp } from 'lucide-react';
 
 interface InsightsPanelProps {
-    insights: string[];
-    source: string;
-    city: string;
+  insights: string[];
+  source: string;
+  city: string;
 }
 
 export default function InsightsPanel({ insights, source, city }: InsightsPanelProps) {
-    return (
-        <div className="card fade-in">
-            <div className="flex items-center justify-between mb-4">
-                <div>
-                    <h3 className="font-semibold text-base" style={{ color: 'var(--text-primary)' }}>
-                        AI Insights — {city}
-                    </h3>
-                    <p className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>
-                        AI-generated pollution analysis
-                    </p>
-                </div>
-                <span
-                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium"
-                    style={{
-                        background: source === 'ai' ? 'rgba(139,92,246,0.15)' : 'rgba(100,116,139,0.15)',
-                        color: source === 'ai' ? '#a78bfa' : 'var(--text-secondary)',
-                    }}
-                >
-                    <Sparkles className="w-3 h-3" />
-                    {source === 'ai' ? 'Gemini AI' : 'Simulated'}
-                </span>
-            </div>
-
-            <div className="flex flex-col gap-3">
-                {insights.map((insight, i) => (
-                    <div
-                        key={i}
-                        className="flex items-start gap-3 p-3 rounded-xl transition-colors"
-                        style={{ background: 'var(--bg-primary)', border: '1px solid var(--border)' }}
-                    >
-                        <div
-                            className="shrink-0 w-6 h-6 rounded-lg flex items-center justify-center text-xs font-bold"
-                            style={{ background: 'rgba(139,92,246,0.15)', color: '#a78bfa' }}
-                        >
-                            {i + 1}
-                        </div>
-                        <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)' }}>
-                            {insight}
-                        </p>
-                    </div>
-                ))}
-            </div>
-
-            <div
-                className="flex items-center gap-2 mt-4 p-3 rounded-xl"
-                style={{ background: 'rgba(59,130,246,0.08)', border: '1px solid rgba(59,130,246,0.2)' }}
-            >
-                <TrendingUp className="w-4 h-4 shrink-0 text-blue-400" />
-                <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
-                    Insights are generated from real-time pollutant readings and AI pattern recognition.
-                </p>
-            </div>
+  return (
+    <div className="card fade-in">
+      <div className="flex items-center justify-between mb-5">
+        <div>
+          <h3 className="heading-md" style={{ color: 'var(--text-primary)' }}>
+            AI insights, {city}
+          </h3>
+          <p className="caption mt-0.5" style={{ color: 'var(--text-tertiary)' }}>
+            AI-generated pollution analysis
+          </p>
         </div>
-    );
+        <span
+          className="flex items-center gap-1.5 px-2 py-1 text-xs font-medium"
+          style={{
+            background: source === 'ai' ? 'var(--accent-muted)' : 'rgba(100,116,139,0.1)',
+            color: source === 'ai' ? 'var(--accent)' : 'var(--text-tertiary)',
+            borderRadius: 'var(--radius-sm)',
+          }}
+        >
+          <Sparkles className="w-3 h-3" />
+          {source === 'ai' ? 'Gemini AI' : 'Simulated'}
+        </span>
+      </div>
+
+      <div className="flex flex-col gap-2.5">
+        {insights.map((insight, i) => (
+          <div
+            key={i}
+            className="flex items-start gap-3 p-3 rounded-lg transition-colors duration-150"
+            style={{
+              background: 'var(--bg-surface)',
+              border: '1px solid var(--border-subtle)',
+            }}
+          >
+            <div
+              className="shrink-0 w-6 h-6 rounded-md flex items-center justify-center data-text text-xs font-bold"
+              style={{
+                background: 'var(--accent-muted)',
+                color: 'var(--accent)',
+              }}
+            >
+              {i + 1}
+            </div>
+            <p
+              className="text-sm leading-relaxed"
+              style={{ color: 'var(--text-primary)', textWrap: 'pretty' }}
+            >
+              {insight}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <div
+        className="flex items-center gap-2.5 mt-4 p-3 rounded-lg"
+        style={{
+          background: 'var(--accent-muted)',
+          border: '1px solid rgba(74, 158, 172, 0.12)',
+        }}
+      >
+        <TrendingUp
+          className="w-4 h-4 shrink-0"
+          style={{ color: 'var(--accent)' }}
+        />
+        <p className="caption" style={{ color: 'var(--text-secondary)' }}>
+          Insights are generated from real-time pollutant readings and AI pattern recognition.
+        </p>
+      </div>
+    </div>
+  );
 }

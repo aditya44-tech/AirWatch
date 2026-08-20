@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { MOCK_INSIGHTS } from '@/lib/mock-data';
+import { getMockInsights } from '@/lib/mock-data';
 
 export async function POST(req: NextRequest) {
     try {
@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
             line.split(',').reduce((obj, val, i) => ({ ...obj, [headers[i]]: val.trim() }), {} as Record<string, string>)
         );
 
-        let insights: string[] = MOCK_INSIGHTS;
+        let insights: string[] = ['Upload your CSV data to see AI-powered insights about pollution patterns, sources, and health impact.', 'Our analysis examines PM2.5, PM10, NO₂, CO, and O₃ concentrations against national and WHO standards.', 'Data from multiple monitoring stations is cross-referenced to identify pollution hotspots and dispersion patterns.', 'Seasonal and meteorological factors are considered when generating trend predictions from your dataset.', 'Health risk assessment is based on exposure duration, pollutant concentration, and vulnerable population proximity.'];
         if (process.env.GEMINI_API_KEY) {
             try {
                 const { getGeminiResponse } = await import('@/lib/gemini');
@@ -24,7 +24,7 @@ ${preview}
 
 Headers: ${headers.join(', ')}
 
-Respond with a JSON array of 5 insight strings, each starting with an emoji. No markdown, no explanation.`;
+Respond with a JSON array of 5 insight strings. No markdown, no explanation.`;
                 const raw = await getGeminiResponse(prompt);
                 const match = raw.match(/\[[\s\S]*\]/);
                 if (match) insights = JSON.parse(match[0]);

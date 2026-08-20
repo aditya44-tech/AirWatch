@@ -37,7 +37,7 @@ Current readings:
 - CO: ${current.co} mg/m³
 - O₃: ${current.o3} μg/m³
 
-Generate exactly 5 concise, specific insight bullets about the causes, contributing factors, and expected trends. Each bullet should start with a relevant emoji. Be specific and intelligent — mention traffic, industry, weather, seasons, geography where relevant.
+Generate exactly 5 concise, specific insight bullets about the causes, contributing factors, and expected trends. Be specific and mention traffic, industry, weather, seasons, geography where relevant.
 
 Respond ONLY with a JSON array of strings, no markdown:
 ["insight 1","insight 2","insight 3","insight 4","insight 5"]`;
@@ -48,7 +48,7 @@ export function buildAdvisoryPrompt(city: string, aqi: number): string {
 
 Generate:
 1. A risk level: one of "Low", "Medium", "High", or "Hazardous"
-2. Exactly 5 health advisory recommendations with emojis, tailored to the AQI level.
+2. Exactly 5 health advisory recommendations, tailored to the AQI level.
 
 Respond ONLY with valid JSON, no markdown:
 {"riskLevel":"High","recommendations":["rec 1","rec 2","rec 3","rec 4","rec 5"]}`;
